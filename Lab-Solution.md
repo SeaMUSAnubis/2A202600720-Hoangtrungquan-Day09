@@ -1,7 +1,5 @@
 # Lab Solutions - Day 09
 
-Tài liệu này tổng hợp lại các kiến thức đúc kết từ các file giải thích (Answer State 1-5) và trình bày giải pháp cho các bài tập thực hành trên lớp.
-
 ## Phần 1: Tổng hợp kiến thức xây dựng hệ thống Multi-Agent (Các Stage 1-5)
 
 Dưới đây là các đúc kết quan trọng qua 5 giai đoạn phát triển của hệ thống được trích xuất từ các bài thực hành:
