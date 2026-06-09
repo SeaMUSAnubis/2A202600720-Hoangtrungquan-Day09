@@ -19,7 +19,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 
 from common.llm import get_llm
 
-QUESTION = "What are the legal consequences if a company breaches a non-disclosure agreement?"
+QUESTION = "Theo pháp luật Việt Nam, những rủi ro và trách nhiệm pháp lý nào phát sinh khi một người lao động tự ý đơn phương chấm dứt hợp đồng lao động trái pháp luật?"
 
 
 async def main():

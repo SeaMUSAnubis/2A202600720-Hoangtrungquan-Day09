@@ -1,0 +1,3 @@
+**[🧑‍⚖️ Legal Worker]**
+
+Tôi không thể xác minh thông tin này từ nguồn hiện có. Các tài liệu được cung cấp không đề cập đến việc xử lý tội buôn ma túy, mà tập trung vào trách nhiệm quản lý nhà nước đối với chất ma túy và tiền chất [nghi-dinh-28-2026-nd-cp-danh-muc-chat-ma-tuy-va-tien-chat.md], cũng như hiệu lực thi hành của một số quy định [nghi-dinh-28-2026-nd-cp-danh-muc-chat-ma-tuy-va-tien-chat.md]. Nghị định 105/2021/NĐ-CP có quy định chi tiết và hướng dẫn thi hành một số điều của Luật Phòng, chống ma túy, bao gồm cơ chế phối hợp giữa các cơ quan, tổ chức trong công tác phòng ngừa, đấu tranh chống tội phạm về ma túy [nghi-dinh-105-2021.md], nhưng không nêu cụ thể về hình thức xử lý tội buôn ma túy.

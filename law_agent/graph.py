@@ -18,6 +18,7 @@ from langgraph.constants import Send
 from langgraph.graph import END, StateGraph
 
 from common.llm import get_llm
+from common.ui_logger import log_agent_event
 
 logger = logging.getLogger(__name__)
 
@@ -65,6 +66,7 @@ async def analyze_law(state: LawState) -> dict:
         HumanMessage(content=state["question"]),
     ]
     result = await llm.ainvoke(messages)
+    log_agent_event("Law Agent", "Phân tích sơ bộ", result.content)
     return {"law_analysis": result.content}
 
 
@@ -112,6 +114,7 @@ async def check_routing(state: LawState) -> dict:
     needs_tax = bool(parsed.get("needs_tax", True))
     needs_compliance = bool(parsed.get("needs_compliance", True))
     logger.info("Routing decision: needs_tax=%s needs_compliance=%s", needs_tax, needs_compliance)
+    log_agent_event("Law Agent", "Định tuyến", f"Cần gọi Tax Agent: {needs_tax}, Cần gọi Compliance Agent: {needs_compliance}")
     return {"needs_tax": needs_tax, "needs_compliance": needs_compliance}
 
 
@@ -147,6 +150,7 @@ async def call_tax(state: LawState) -> dict:
             depth=state.get("delegation_depth", 0) + 1,
         )
         logger.info("Tax Agent returned %d chars", len(result))
+        log_agent_event("Tax Agent", "Trả kết quả", result)
         return {"tax_result": result}
     except Exception as exc:
         logger.exception("call_tax failed: %s", exc)
@@ -168,6 +172,7 @@ async def call_compliance(state: LawState) -> dict:
             depth=state.get("delegation_depth", 0) + 1,
         )
         logger.info("Compliance Agent returned %d chars", len(result))
+        log_agent_event("Compliance Agent", "Trả kết quả", result)
         return {"compliance_result": result}
     except Exception as exc:
         logger.exception("call_compliance failed: %s", exc)
@@ -201,6 +206,7 @@ async def aggregate(state: LawState) -> dict:
         HumanMessage(content=combined),
     ]
     result = await llm.ainvoke(messages)
+    log_agent_event("Law Agent", "Tổng hợp kết quả", "Đã viết xong câu trả lời cuối cùng.")
     return {"final_answer": result.content}
 
 

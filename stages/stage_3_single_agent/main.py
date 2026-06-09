@@ -172,11 +172,31 @@ def check_compliance_requirements(industry: str, company_size: str) -> str:
     )
 
 
-TOOLS = [search_legal_database, calculate_penalty, check_compliance_requirements]
+@tool
+def search_case_law(keywords: str) -> str:
+    """Search for historical case law precedents based on keywords."""
+    cases = {
+        "breach": "Hadley v. Baxendale (1854): Established the rule that consequential damages must be foreseeable to be recoverable in a breach of contract case.",
+        "contract": "Hawkins v. McGee (1929): Expectation damages aim to put the non-breaching party in the position they would have been in had the contract been performed.",
+        "privacy": "In re Facebook Biometric Information Privacy Litigation (2020): $650M settlement for violating BIPA.",
+        "tax": "United States v. Windsor (2013): Landmark tax case."
+    }
+    words = keywords.lower().split()
+    results = []
+    for key, value in cases.items():
+        if key in words or key in keywords.lower():
+            results.append(value)
+    
+    if results:
+        return "Found Case Law:\n" + "\n".join(results)
+    return "No relevant case law found for those keywords."
+
+
+
+TOOLS = [search_legal_database, calculate_penalty, check_compliance_requirements, search_case_law]
 
 QUESTION = (
-    "A tech startup with $5M revenue was caught sharing user data without consent "
-    "and failed to pay taxes on overseas revenue. What are all the legal consequences?"
+    "What are the legal consequences and relevant case law if a software company commits a material breach of contract?"
 )
 
 SYSTEM_PROMPT = (
@@ -205,7 +225,7 @@ async def main():
     print("-" * 70)
 
     llm = get_llm()
-    graph = create_react_agent(model=llm, tools=TOOLS, prompt=SYSTEM_PROMPT)
+    graph = create_react_agent(model=llm, tools=TOOLS, prompt=SYSTEM_PROMPT, debug=True)
 
     inputs = {"messages": [{"role": "user", "content": QUESTION}]}
 

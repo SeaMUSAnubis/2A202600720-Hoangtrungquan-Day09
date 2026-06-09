@@ -18,6 +18,7 @@ from langchain_core.tools import tool
 from langgraph.prebuilt import create_react_agent
 
 from common.llm import get_llm
+from common.ui_logger import log_agent_event
 
 logger = logging.getLogger(__name__)
 
@@ -72,6 +73,7 @@ def build_graph(trace_id: str, context_id: str, depth: int) -> Any:
         )
 
         try:
+            log_agent_event("Customer Agent", "Bắt đầu xử lý", f"Câu hỏi: {question}")
             endpoint = await discover("legal_question")
             result = await delegate(
                 endpoint=endpoint,
